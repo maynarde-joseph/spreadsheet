@@ -1,0 +1,40 @@
+# RSheets Mark Request
+
+# Marked Questions
+
+These questions are listed in the spec, and you must fill them out
+to receive marks for the Design Questions.
+
+## Question 1: I used "msg.trim().splitn(2, ' ').collect();" which would let me first find out if it was a set or get command then handle 
+the the rest of the command. An alternative approach would be to represent them as enum that contains command type and the rest of the 
+expression. This may be a better solution since it would make identifying wether the command is valid or not and also makes it easier to 
+ensure there isnt any "leftovers" after the expression has been parsed. Since I didn't use a parser the code I have for breaking down the 
+command is very messy and may have issues with leftovers.
+
+## Question 2: I handle the three types using three functions: get_cell_value, get_matrix_value, and get_vector_value. I use get_cell_value
+in both get_matrix_value and get_vector_value. I believe there is almost no reused code when it comes to the functions themselves. 
+
+## Question 3: My Coordiantor contians two Mutex data structures. If my code was single threaded (which it was before starting part 3), there wouldn't
+be a need for the Coordinator and the hashmaps would just exist. There wouldn't be a need to have them as Mutex meaning no need for locks and unwraps.
+I also wouldnt need a scope where I would clone the Coordinator.
+
+## Question 4: I deal with the complex edge case on line 39 by directly inserting into the expressions hashmap after a set is called. This will in turn
+cause issues because now when I do other sets it will re-evaluate the expression which will call the sleep_then all over again (I think). I wanted to 
+simplify things so I decided to only use 2 hashmaps, I believe if I used more HashMap(like dependency traker then sleep_then issue would be resolved).
+Also on a side note because im not using a dependency tracker, my algorithm for updating cell_values is like o(n^3) or smth (maybe 4?).
+
+## Question 5: My solution uses a single worker thread that spawns on server start. If i was to use multiple threads(which i used to) to udpdate 
+dependencoes. When a set command is given I add it to a HashMap of expressionsthen then one worker thread will gain access to the expressions hashmap 
+then evalate all expressions to update the cell_values, any other thread that wants to do afterwards will need to need to wait in queue.
+
+# Questions to the Marker (OPTIONAL)
+
+Remember: you don't have to fill these out; but if
+you want to get feedback on a particular element of
+your code; you can!
+
+1.
+
+2.
+
+3.
